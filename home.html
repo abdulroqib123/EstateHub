@@ -74,26 +74,7 @@
 
     <footer><p>&copy; EstateHub | All rights reserved</p></footer>
     <script>
-      //For side bar display
-      const sidebar = document.getElementById("sidebar");
-      function toggleSidebar() {
-        sidebar.classList.toggle("show");
-      }
-      //to move between pages if using select element
-      function goToLink(selectElement) {
-        const selectedValue = selectElement.value;
-        if (selectedValue) {
-          window.location.href = selectedValue;
-        }
-      }
-      // Link glows slightly when active
-      const links = document.querySelectorAll(".anchor-nav-bar");
-      links.forEach((link) => {
-        if (link.href === window.location.href) {
-          link.classList.add("active");
-        }
-      });
-
+   
       //Get property details from local storage
       let getproperty = JSON.parse(localStorage.getItem("properties")) || [];
 
@@ -156,5 +137,6 @@
 
       document.addEventListener("DOMContentLoaded", renderCards);
     </script>
+    <script src="sidebar.js"></script>
   </body>
 </html>

@@ -1,276 +1,256 @@
+/* ================================
+   GLOBAL
+================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  min-height: 100vh;
-  margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #000000, #303030);
-  color: #222;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "navbar navbar"
-    "sidebar main"
-    "footer footer";
-}
-nav {
-  top: 0;
-  position: sticky;
-  grid-area: navbar;
-  background: linear-gradient(90deg, orange, skyblue, yellow);
-  color: black;
-  margin: 5px 20px;
-  padding: 0 0 0 30px;
-  border-radius: 30px;
-}
-aside {
-  height: calc(100vh - 42.4px);
-  top: 45px;
-  position: sticky;
-  align-self: start;
-  grid-area: sidebar;
-  background-color: rgb(26, 26, 26);
-  width: 290px;
-  height: 90vh;
-  border-radius: 20px;
-  padding: 10px 0 0 0;
-  justify-content: center;
-}
-#dashboardHeader {
-  margin: 5px 0 30px 30px;
-  color: white;
-}
-h2 {
-  color: white;
-}
-#dashboard-content {
-  margin: 10px 0 0 0;
-}
-main {
-  margin: 20px;
-  grid-area: main;
-  color: white;
-  display: block;
-  max-width: 1200px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(44, 62, 80, 0.08);
-}
-@media (max-width: 800px) {
-  body {
-    grid-template-columns: 1fr;
-  }
-  aside {
-    position: fixed;
-    width: 300px;
-    display: none;
-  }
-  .show {
-    display: block;
-  }
-  .menu-icon {
-    width: 30px;
-    cursor: pointer;
-    margin: 5px;
-  }
-  .menu-icon span {
-    display: block;
-    height: 3px;
-    background: white;
-    margin: 5px 5px;
-    border-radius: 2px;
-    transition: 0.6s;
-  }
-  #detailsCard div {
-    width: 90%;
-  }
-  .statsCard {
-    background-color: orange;
-    width: 90%;
-    height: 100px;
-    border-radius: 20px;
-    padding: 10px;
-    transition: transform 0.5s ease-out, box-shadow 0.6s ease-in;
-  }
-  #statsCards {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .statsCard {
-    background-color: orange;
-    width: 200px;
-    height: 100px;
-    border-radius: 20px;
-    padding: 10px;
-    transition: transform 0.5s ease-out, box-shadow 0.6s ease-in;
-  }
-  #statsCards {
-    flex-direction: column;
-  }
-  .statsCard {
-    min-width: 95vw;
-    height: auto;
-  }
-}
-footer {
-  top: 0;
-  position: sticky;
-  grid-area: footer;
-  text-align: center;
-  padding: 1.5rem 0;
-  background: #2d6a4f;
+  background: linear-gradient(135deg, #000, #303030);
+  min-height: 100vh;
   color: #fff;
-  font-size: 1rem;
-  margin-top: 3rem;
-  border-radius: 0 0 12px 12px;
-}
-section,
-.anchor-nav-bar {
-  margin: 1px 5px 0 10px;
-}
-select,
-.anchor-nav-bar {
-  text-decoration: none;
-  margin: 2px 10px 0 5px;
-  width: 280px;
-  height: 50px;
-  border-radius: 10px;
   display: flex;
-  background-color: rgb(45, 45, 45);
-  color: white;
-  font-size: 24px;
-  border: none;
-  border-bottom: 2px solid black;
-  text-align: center;
   flex-direction: column;
 }
-select:hover {
-  background-color: rgb(86, 86, 86);
-}
-.anchor-nav-bar:hover {
-  background-color: rgb(86, 86, 86);
-}
-.anchor-nav-bar.active {
-  background-color: #00bcd4;
+
+
+/* ================================
+   NAVBAR (Top Sticky)
+================================ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, orange, skyblue, yellow);
   color: #000;
-  font-weight: 600;
+  height: 55px;
+  padding: 0 18px;
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
 }
 
-#view-property-page {
-  background-color: #444;
-  color: white;
-  display: block;
+nav h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
 }
-#view-property-page button {
-  margin: 20px;
-  display: flex;
-  background: #ffffff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: black;
+
+/* Burger Icon (mobile only active) */
+.menu-icon {
+  width: 34px;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
+  display: none;
 }
-#view-property-page button:hover {
-  background: #9e9e9e;
-  color: white;
+
+.menu-icon span {
+  display: block;
+  height: 4px;
+  background: #000;
+  margin: 5px;
+  border-radius: 2px;
+  transition: 0.4s;
 }
+
+/* ================================
+   SIDEBAR (Desktop + Mobile Slide)
+================================ */
+aside {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  width: 280px;
+  height: calc(100vh - 55px);
+  background: #1b1b1b;
+  border-right: 2px solid #111;
+  padding-top: 15px;
+  overflow-y: auto;
+  transition: left 0.45s ease;
+  z-index: 999;
+}
+
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+aside::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 6px;
+}
+
+/* Sidebar Hidden (mobile state default) */
+aside.hide {
+  left: -100%;
+}
+
+/* ================================
+   SIDEBAR LINKS
+================================ */
+#nav-bar p {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.anchor-nav-bar {
+  display: block;
+  width: 90%;
+  margin: 8px auto;
+  padding: 14px;
+  background: #2a2a2a;
+  border-radius: 12px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.35s ease, transform 0.25s ease;
+}
+
+.anchor-nav-bar:hover {
+  background: #3c3c3c;
+  transform: translateX(6px);
+}
+
+.anchor-nav-bar.active {
+  background: #00bcd4;
+  color: #000;
+  font-weight: 700;
+  transform: scale(1.02);
+}
+
+/* ================================
+   DASHBOARD CONTENT
+================================ */
+#dashboard-content {
+  flex: 1;
+  padding: 80px 20px 30px 20px;
+  margin-left: 280px;
+  transition: margin 0.45s ease;
+}
+
+#dashboardHeader {
+  margin-bottom: 20px;
+}
+
+/* ================================
+   STATS CARDS
+================================ */
 #statsCards {
   display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  width: 100%;
-  margin: 0 auto;
-}
-.statsCard {
-  background-color: orange;
-  width: 200px;
-  height: 100px;
-  border-radius: 20px;
-  padding: 10px;
-  transition: transform 0.5s ease-out, box-shadow 0.6s ease-in;
-}
-.statsCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(255, 168, 7, 0.6);
-}
-.statsCard h3 {
-  color: #171717;
-}
-.statsCard p {
-  font-size: 30px;
-  font-weight: 600;
-  color: white;
+  width: auto;
+  margin-bottom: 20px;
 }
 
-/*Details container */
+.statsCard {
+  background: orange;
+  border-radius: 14px;
+  width: 240px;
+  font-size: 1.2rem;
+  padding: 15px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.statsCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(255, 168, 7, 0.55);
+}
+
+.statsCard h3 {
+  margin-bottom: 6px;
+  color: #000;
+}
+
+/* ================================
+   PROPERTY CARDS (LIST)
+================================ */
 #detailsCard {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 10px;
-  margin: 10px;
-  border-radius: 15px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 14px;
 }
-#detailsCard div {
-  background-color: #2d2d2d;
-  padding: 10px;
-  width: 300px;
-  border-radius: 12px;
-  transition: all 0.5s ease-in;
+
+#detailsCard > div {
+  background: #202020;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid #333;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
-#detailsCard div:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 20px rgba(255, 168, 7, 0.9);
+
+#detailsCard > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(255, 168, 7, 0.6);
 }
 #detailsCard div h3 {
   color: orange;
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #444;
-  background: #1f1f1f;
+  background: #000000;
   border-radius: 20px;
 }
-#detailsCard div p {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-}
-button {
-  background: #444;
-  border: none;
-  padding: 6px 12px;
+
+#detailsCard button {
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 6px 14px;
+  background: #fff;
+  color: #000;
   border-radius: 6px;
-  color: white;
   cursor: pointer;
-}
-button:hover {
-  background: #666;
+  border: none;
+  transition: 0.3s;
 }
 
-/* Form */
-#add-property form input,
-textarea {
-  display: flex;
-  width: 90%;
-  margin: 5px 20px;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
+#detailsCard button:hover {
+  background: #7a7a7a;
+  color: #fff;
 }
-#add-property form button {
-  margin: 10px 20px;
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+  text-align: center;
+  color: #fff;
+  padding: 16px;
+  font-size: 14px;
+  margin-top: 25px;
+  opacity: 0.7;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .menu-icon {
+    display: block;
+  }
+
+  aside {
+    left: -100%;
+  }
+
+  aside.show {
+    left: 0;
+  }
+
+  #dashboard-content {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+
+  #statsCards {
+    justify-content: center;
+  }
+  .statsCard {
+    width: 95%;
+  }
 }
