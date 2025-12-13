@@ -13,8 +13,8 @@ main h1 {
   font-weight: 600;
   margin-bottom: 25px;
   text-align: center;
-  background: linear-gradient(90deg, #ffe600, #ffad00);
-  -webkit-background-clip: text;
+  background: linear-gradient(130deg, #ffae00, #fff700);
+  background-clip: text;
   color: transparent;
 }
 

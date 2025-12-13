@@ -74,13 +74,13 @@
     propertyForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      const type = document.getElementById("type").value;
-      const owner = document.getElementById("owner").value;
-      const status = document.getElementById("status").value;
-      const rent = "₦" + document.getElementById("rent").value;
-      const expiry = document.getElementById("expiry").value;
-      const tenants = document.getElementById("tenants").value;
-      const description = document.getElementById("description").value;
+      const type = document.getElementById("type").value.trim();
+      const owner = document.getElementById("owner").value.trim();
+      const status = document.getElementById("status").value.trim();
+      const rent = "₦" + document.getElementById("rent").value.trim();
+      const expiry = document.getElementById("expiry").value.trim();
+      const tenants = document.getElementById("tenants").value.trim();
+      const description = document.getElementById("description").value.trim();
 
       const newProperty = { type, owner, status, rent, leaseExpiry: expiry, tenants, description };
       getproperty.push(newProperty);
