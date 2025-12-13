@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | EstateHub</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="form.css" />
+  </head>
+  <body>
+    <header>
+      <nav style="display: inline-flex">
+        <div class="menu-icon" onclick="toggleSidebar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h1>EstateHub</h1>
+      </nav>
+      <aside id="sidebar">
+        <div id="nav-bar">
+          <p style="text-align: center; color: white">Navigate</p>
+          <a class="anchor-nav-bar" href="home.html">Dashboard</a>
+          <a href="property.html" class="anchor-nav-bar">Add Property</a>
+          <a class="anchor-nav-bar" href="login-signup.html">Login/Signup</a>
+        </div>
+      </aside>
+    </header>
+    <main>
+      <!--SIGNUP FORM-->
+      <form id="signupForm">
+        <h2>Signup To EstateHub</h2>
+        <fieldset>
+          <legend>Personal Details</legend>
+          <label for="userName">Username:</label>
+          <input
+            type="text"
+            id="userName"
+            placeholder="Your username"
+            required
+          />
+          <label for="fullName">Full Name:</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="e.g Alice Bora"
+            required
+          />
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="youremail@gmail.com"
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Security</legend>
+          <label for="password">Enter Password:</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter Your password"
+            required
+          />
+          <label for="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Your password"
+            required
+          />
+        </fieldset>
+        <button type="submit">Signup</button>
+        <p>Have an account? <a id="loginLink" href="#">Login</a></p>
+      </form>
+
+      <!--LOGIN FORM-->
+      <form id="loginForm">
+        <h2>Login To EstateHub</h2>
+        <label for="loginEmail">Email:</label>
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="youremail@gmail.com"
+          required
+        />
+        <label for="loginPassword">Enter Password:</label>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter Your password"
+          required
+        />
+        <button type="submit">Login</button>
+
+        <p>No account yet? <a id="signupLink" href="#">Signup</a></p>
+      </form>
+    </main>
+    <script>
+      const loginLink = document.getElementById("loginLink");
+      const signupLink = document.getElementById("signupLink");
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+
+      function showLogin() {
+        signupForm.style.display = "none";
+        loginForm.style.display = "block";
+      }
+      function showSignup() {
+        loginForm.style.display = "none";
+        signupForm.style.display = "block";
+      }
+      loginLink.addEventListener("click", () => {
+        showLogin();
+      });
+      signupLink.addEventListener("click", () => {
+        showSignup();
+      });
+    </script>
+    <script src="sidebar.js"></script>
+  </body>
+</html>

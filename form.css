@@ -8,7 +8,7 @@ main {
 }
 
 /* Title */
-main h1 {
+main h2 {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 25px;
@@ -18,10 +18,16 @@ main h1 {
   color: transparent;
 }
 
+
+/*Hide signup by default*/
+#signupForm {
+  display: none;
+}
 /* Form Container */
 form {
   width: 100%;
   max-width: 420px;
+  margin-top: 22px;
   background: #111;
   padding: 25px 30px;
   border-radius: 12px;
@@ -79,6 +85,7 @@ legend {
 /* Submit Button */
 button {
   width: 100%;
+  margin: 10px auto;
   padding: 12px;
   font-size: 1rem;
   border: none;
@@ -92,7 +99,6 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 10px rgba(255, 230, 0, 0.6);
 }
 
 /* Mobile */
@@ -101,4 +107,15 @@ button:hover {
     max-width: 92%;
     padding: 20px;
   }
+}
+
+form a {
+  color: #87ceeb;
+}
+form a:hover {
+  color: #87cfebb3;
+}
+form a:focus {
+    color: #87cfeb43;
+
 }

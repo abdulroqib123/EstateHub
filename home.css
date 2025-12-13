@@ -8,14 +8,13 @@
 }
 
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "poppins", Arial, sans-serif;
   background: linear-gradient(135deg, #000, #303030);
   min-height: 100vh;
   color: #fff;
   display: flex;
   flex-direction: column;
 }
-
 
 /* ================================
    NAVBAR (Top Sticky)
@@ -25,7 +24,7 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(90deg, orange, skyblue, yellow);
+  background: linear-gradient(90deg, #ffa500, #87ceeb, #ffff00);
   color: #000;
   height: 55px;
   padding: 0 18px;
@@ -94,6 +93,7 @@ aside.hide {
   font-weight: 600;
   letter-spacing: 0.5px;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .anchor-nav-bar {
@@ -103,15 +103,15 @@ aside.hide {
   padding: 14px;
   background: #2a2a2a;
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
   text-decoration: none;
   color: #fff;
-  font-weight: 500;
-  transition: background 0.35s ease, transform 0.25s ease;
+  transition: background-color 0.35s ease, transform 0.25s ease;
 }
 
 .anchor-nav-bar:hover {
-  background: #3c3c3c;
+  background-color: #3c3c3c;
   transform: translateX(6px);
 }
 

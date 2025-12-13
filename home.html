@@ -32,6 +32,12 @@
       content="Explore listings and connect with agents on EstateHub."
     />
     <link rel="stylesheet" href="home.css" />
+    <style>
+      .placeholderText {
+        opacity: 0.3;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <nav style="display: inline-flex">
@@ -44,10 +50,10 @@
     </nav>
     <aside id="sidebar">
       <div id="nav-bar">
-        <p style="text-align: center; color: white">Navigate</p>
+        <p>Navigate</p>
         <a class="anchor-nav-bar" href="home.html">Dashboard</a>
         <a href="property.html" class="anchor-nav-bar">Add Property</a>
-        <a class="anchor-nav-bar" href="Login.html">Login/Signup</a>
+        <a class="anchor-nav-bar" href="login-signup.html">Login/Signup</a>
       </div>
     </aside>
 
@@ -93,7 +99,7 @@
         if (!detailsCard) return; // exit if table not on this page
 
         if (getproperty.length === 0) {
-          detailsCard.innerHTML = `<p>Nothing to show</p>`;
+          detailsCard.innerHTML = `<p class="placeholderText">Nothing to show</p>`;
           return;
         }
 
@@ -132,6 +138,7 @@
           getproperty.splice(index, 1);
           localStorage.setItem("properties", JSON.stringify(getproperty));
           renderCards();
+          location.reload()
         }
       }
 
