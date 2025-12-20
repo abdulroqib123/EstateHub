@@ -37,9 +37,54 @@
         opacity: 0.3;
         text-align: center;
       }
+
+      div.dot-container {
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        position: fixed;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+      }
+      .dot-container span {
+        width: 1rem;
+        height: 1rem;
+        background-color: #ffa500;
+        border-radius: 50%;
+        animation: bounce 1.5s linear infinite;
+      }
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        50% {
+          transform: translateY(6px);
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .dot-container span:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .dot-container span:nth-child(3) {
+        animation-delay: 1s;
+      }
+      .dot-container.hide {
+        display: ;
+      }
     </style>
   </head>
   <body>
+    <div class="dot-container">
+    </div>
+    
     <nav style="display: inline-flex">
       <div class="menu-icon" onclick="toggleSidebar()">
         <span></span>
@@ -51,9 +96,7 @@
     <aside id="sidebar">
       <div id="nav-bar">
         <p>Navigate</p>
-        <a class="anchor-nav-bar" href="home.html">Dashboard</a>
-        <a href="property.html" class="anchor-nav-bar">Add Property</a>
-        <a class="anchor-nav-bar" href="login-signup.html">Login/Signup</a>
+        <!--USE JS TO ADD NAV LINKS-->
       </div>
     </aside>
 
@@ -80,7 +123,6 @@
 
     <footer><p>&copy; EstateHub | All rights reserved</p></footer>
     <script>
-   
       //Get property details from local storage
       let getproperty = JSON.parse(localStorage.getItem("properties")) || [];
 
@@ -138,12 +180,13 @@
           getproperty.splice(index, 1);
           localStorage.setItem("properties", JSON.stringify(getproperty));
           renderCards();
-          location.reload()
+          location.reload();
         }
       }
 
       document.addEventListener("DOMContentLoaded", renderCards);
     </script>
+    <script src="nav.js"></script>
     <script src="sidebar.js"></script>
   </body>
 </html>

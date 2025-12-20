@@ -150,9 +150,10 @@ aside.hide {
 }
 
 .statsCard {
-  background: orange;
+  background: #ffa500;
   border-radius: 14px;
-  width: 240px;
+  flex: 1;
+  min-width: 200px;
   font-size: 1.2rem;
   padding: 15px;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -160,7 +161,7 @@ aside.hide {
 
 .statsCard:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 22px rgba(255, 168, 7, 0.55);
+  box-shadow: 0 8px 22px rgba(255, 168, 7, 0.249);
 }
 
 .statsCard h3 {
@@ -229,7 +230,7 @@ footer {
 /* ================================
    RESPONSIVE
 ================================ */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .menu-icon {
     display: block;
   }

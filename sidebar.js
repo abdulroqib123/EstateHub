@@ -17,3 +17,18 @@ links.forEach((link) => {
     link.classList.add("active");
   }
 });
+
+
+const dotContainer = document.querySelector(".dot-container");
+
+const span = document.createElement("span");
+
+for(let i = 0; i < 3; i++) {
+  const copy = span.cloneNode("true");
+  
+  dotContainer.appendChild(copy);
+}
+
+   window.addEventListener("load", () => {
+     dotContainer.style.display = "none";
+   });

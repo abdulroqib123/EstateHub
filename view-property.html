@@ -67,7 +67,8 @@
       }
 
       /* Back Button */
-      button {
+      .btn {
+        text-decoration: none;
         margin-top: 25px;
         padding: 12px 25px;
         border-radius: 8px;
@@ -80,7 +81,7 @@
         transition: transform 0.25s, box-shadow 0.25s;
       }
 
-      button:hover {
+      .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 0 10px rgba(255, 230, 0, 0.5);
       }
@@ -103,7 +104,7 @@
 
     <div id="details"></div>
 
-    <button onclick="goBack()">← Back to Dashboard</button>
+    <a class="btn" href="home.html">← Back to Dashboard</a>
 
     <script>
       const property = JSON.parse(localStorage.getItem("viewProperty"));
@@ -123,10 +124,6 @@
         <p><strong>Rent/Value:</strong> ${property.rent}</p>
         <p><strong>Description:</strong> ${property.description || "-"}</p>
       `;
-
-      function goBack() {
-        window.location.href = "home.html";
-      }
     </script>
   </body>
 </html>
