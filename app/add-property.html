@@ -17,8 +17,8 @@
   <meta property="og:type" content="website" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="home.css" />
-  <link rel="stylesheet" href="form.css">
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../form.css">
 </head>
 
 <body>
@@ -87,7 +87,7 @@ const propertyId = crypto.randomUUID();
       getproperty.push(newProperty);
       localStorage.setItem("properties", JSON.stringify(getproperty));
 
-      window.location.href = "home.html";
+      window.location.href = "dashboard.html";
     });
 
     function deleteProperty(index) {
@@ -98,7 +98,7 @@ const propertyId = crypto.randomUUID();
       }
     }
   </script>
-      <script src="nav.js"></script>
-  <script src="sidebar.js"></script>
+      <script src="../nav.js"></script>
+  <script src="../sidebar.js"></script>
 </body>
 </html>

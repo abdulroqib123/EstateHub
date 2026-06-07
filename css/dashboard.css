@@ -24,11 +24,9 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(90deg, #ffa500, #87ceeb, #ffff00);
-  color: #000;
+  background: #252424;
   height: 55px;
   padding: 0 18px;
-  border-radius: 0 0 16px 16px;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -50,7 +48,7 @@ nav h1 {
 .menu-icon span {
   display: block;
   height: 4px;
-  background: #000;
+  background: #ffffff;
   margin: 5px;
   border-radius: 2px;
   transition: 0.4s;
