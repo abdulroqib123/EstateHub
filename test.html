@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EstateHub | Dashboard</title>
-    <link rel="stylesheet" href="home.css">
+
+    <!--SCYBUD UI-->
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/variables.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/layout.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/components/sidebar/sidebar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/components/buttons/nav-buttons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/typography.css"
+    />
+
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="form.css">
     
 </head>
@@ -24,12 +47,12 @@
         <div id="nav-bar">
             <p style="text-align: center; color: white;">Navigate</p>
             <a class="anchor-nav-bar" href="home.html">Dashboard</a>
-            <select onchange="goToLink(this)">
+            <select class="anchor-nav-bar" onchange="goToLink(this)">
                 <option value="" disabled selected>--Clients--</option>
                 <option value="clients.html">Clients</option>
                 <option value="addclients.html">Add Client</option>
             </select>
-            <select onchange="goToLink(this)">
+            <select class="anchor-nav-bar" onchange="goToLink(this)">
                 <option value="" disabled selected>--Properties--</option>
                 <option value="test.html">Properties List</option>
                 <option id="add-propertyBtn" >Add Property</option>

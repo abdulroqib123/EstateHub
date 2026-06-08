@@ -8,12 +8,9 @@
 }
 
 body {
-  font-family: "poppins", Arial, sans-serif;
-  background: linear-gradient(135deg, #000, #303030);
+  background: var(--bg-primary);
   min-height: 100vh;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
+  color: var(--text-primary);
 }
 
 /* ================================
@@ -95,6 +92,7 @@ aside.hide {
 }
 
 .anchor-nav-bar {
+  border: none;
   display: block;
   width: 90%;
   margin: 8px auto;

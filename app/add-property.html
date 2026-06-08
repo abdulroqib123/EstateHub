@@ -16,9 +16,31 @@
   <meta property="og:description" content="Add new properties to EstateHub" />
   <meta property="og:type" content="website" />
 
+  <!--SCYBUD UI-->
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/variables.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/layout.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/components/sidebar/sidebar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/components/buttons/nav-buttons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/typography.css"
+    />
+
   <!-- Styles -->
   <link rel="stylesheet" href="../css/dashboard.css" />
-  <link rel="stylesheet" href="../form.css">
+  <link rel="stylesheet" href="../css/components/form.css">
 </head>
 
 <body>
@@ -46,19 +68,44 @@
   <main id="dashboard-content">
     
     <section id="add-property">
-      <form id="propertyForm">
-        <h2 class="page-title">Add Property</h2>
-        <input type="text" id="type" placeholder="Property type (e.g. Apartment, Estate)" required />
-        <input type="text" id="owner" placeholder="Owner's name" required />
-        <input type="text" id="status" placeholder="Rented, Leased, For Sale" required />
-        <input type="text" id="rent" placeholder="Amount e.g. 250000 or 100k" required />
-        <label for="expiry">Lease Expiry Date:</label>
-        <input type="date" id="expiry" placeholder="Lease expiry date" required />
-        <input type="text" id="tenants" placeholder="Tenant name(s)" />
-        <textarea id="description" placeholder="Property description"></textarea>
-      
-        <button type="submit" class="submit-btn">Add Property</button>
-      </form>
+     <form id="propertyForm">
+  <h2 class="page-title">Add Property</h2>
+  
+  <!-- Progress Bar Indicators -->
+  <div class="progress-indicator">
+    <span class="step-dot active">1</span>
+    <span class="step-dot">2</span>
+  </div>
+
+  <!-- STEP 1: Basic Information -->
+  <div class="form-step active" data-step="1">
+    <h3>Basic Info</h3>
+    <div class="form-group-row">
+      <input type="text" id="type" placeholder="Property type (e.g. Apartment)" required />
+      <input type="text" id="status" placeholder="Status (e.g. For Sale)" required />
+    </div>
+    <input type="text" id="owner" placeholder="Owner's name" required />
+    <textarea id="description" placeholder="Property description"></textarea>
+    
+    <button type="button" class="btn-next">Next Step →</button>
+  </div>
+
+  <!-- STEP 2: Financials & Location -->
+  <div class="form-step" data-step="2">
+    <h3>Financials & Address</h3>
+    <div class="form-group-row">
+      <input type="text" id="rent" placeholder="Amount (e.g. 100k)" required />
+      <input type="date" id="expiry" required />
+    </div>
+    <input type="text" id="tenants" placeholder="Tenant name(s) (Optional)" />
+    <input type="text" id="address" placeholder="Full Property Address" required />
+
+    <div class="button-group">
+      <button type="button" class="btn-prev">← Back</button>
+      <button type="submit" class="submit-btn">Add Property 🎉</button>
+    </div>
+  </div>
+</form>
     </section>
   </main>
 
@@ -100,5 +147,6 @@ const propertyId = crypto.randomUUID();
   </script>
       <script src="../nav.js"></script>
   <script src="../sidebar.js"></script>
+  <script type="module" src="../js/components/form.js"></script>
 </body>
 </html>
