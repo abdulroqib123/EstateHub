@@ -2,7 +2,7 @@ const navBar = document.getElementById("nav-bar");
 
 const anchors = [
   { text: "Dashboard", href: "dashboard.html" },
-  { text: "Organisations", href: "organisations.html" },
+  { text: "Organisations", href: "orgs.html" },
   { text: "Clients", href: "clients.html" },
 ];
 
