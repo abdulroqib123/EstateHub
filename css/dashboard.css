@@ -154,11 +154,11 @@ aside.hide {
 
 .statsCard h3 {
   order: 2;
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
 }
 .statsCard p {
   color: var(--accent);
-  font-size: var(--text-xl);
+  font-size: var(--text-4xl);
   font-weight: var(--font-bold);
 }
 
@@ -223,7 +223,6 @@ aside.hide {
   box-shadow: 0 8px 18px rgba(255, 168, 7, 0.082);
 }
 #detailsCard div h3 {
-  color: var(--accent);
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #444;
@@ -232,7 +231,7 @@ aside.hide {
   margin: 10px auto 14px;
 }
 #detailsCard div p {
-  margin: 18px;
+  margin: var(--space-sm) 0;
 }
 #detailsCard button {
   margin-right: var(--space-sm);
