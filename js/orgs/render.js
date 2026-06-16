@@ -16,7 +16,7 @@ export async function renderOrgsCards(orgsArray, onDeleteClick) {
       icon: "🏢",
       title: "Nothing here yet",
       description: "You have not created an org yet.",
-      actionText: "Add org",
+      actionText: "Create org",
       onAction: async () => {
         await loadComponent(
           "../components/modals/create-org.html",

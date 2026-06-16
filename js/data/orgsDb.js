@@ -11,6 +11,16 @@ export async function insertOrg(orgPayload) {
   return data;
 }
 
+//Isert member to org
+export async function insertOrgMember(orgMemberPayload) {
+  const { data, error } = await supabase
+    .from("organization_members")
+    .insert([orgMemberPayload])
+    .select();
+  if (error) throw error;
+  return data;
+}
+
 // Fetch all properties belonging to the active organization or standalone agent
 export async function fetchOrgs(agentId) {
 
