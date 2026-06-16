@@ -2,7 +2,6 @@
 import { insertProperty } from "../data/propertiesDb.js";
 import { supabase } from "../supabase.js";
 
-
 export async function handleFormSteps() {
   const form = document.getElementById("propertyForm");
   const steps = document.querySelectorAll(".form-step");
@@ -11,9 +10,10 @@ export async function handleFormSteps() {
   const prevButtons = document.querySelectorAll(".btn-prev");
   const unitsContainer = document.getElementById("unitsContainer");
   const addUnitBtn = document.getElementById("addUnitBtn");
+  const getLocationBtn = document.getElementById("getCurrentLocationBtn");
 
   let currentStep = 1;
-  let unitCount = 1;
+  let unitCount = 0;
 
   function updateFormState() {
     steps.forEach((step) => {
@@ -54,31 +54,58 @@ export async function handleFormSteps() {
     });
   });
 
+  if (getLocationBtn) {
+    getLocationBtn.addEventListener("click", () => {
+      getLocationBtn.innerText = "Locating Coordinates...";
+      if (!navigator.geolocation) {
+        alert("Geolocation unsupported by browser environment.");
+        getLocationBtn.innerText = "📍 Auto-Detect GPS Coordinates";
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          document.getElementById("latitude").value =
+            pos.coords.latitude.toFixed(6);
+          document.getElementById("longitude").value =
+            pos.coords.longitude.toFixed(6);
+          getLocationBtn.innerText = "📍 Coordinates Linked!";
+        },
+        (err) => {
+          console.error(err);
+          alert(`Telemetry sync failed: ${err.message}`);
+          getLocationBtn.innerText = "📍 Auto-Detect GPS Coordinates";
+        },
+      );
+    });
+  }
+
   if (addUnitBtn) {
     addUnitBtn.addEventListener("click", () => {
       unitCount++;
       const unitCard = document.createElement("div");
       unitCard.classList.add("unit-card");
       unitCard.setAttribute("data-unit-index", unitCount - 1);
+
       unitCard.innerHTML = `
-      <div class="unit-card-header">
-            <h4>Unit ##${unitCount}</h4>
-            <button type="button" class="btn-remove-unit" style="display: none;">Remove</button>
-          </div>
-          <div class="form-group-row">
-            <input type="text" name="unit_name[]" placeholder="Unit # (e.g., Apt 1A)" required />
+        <div class="unit-card-header">
+          <h4>Unit #${unitCount}</h4>
+          <button type="button" class="btn-remove-unit" style="display: block;">Remove</button>
+        </div>
+        <div class="form-group-row">
+          <label>
+            Unit name *
+            <input type="text" name="unit_name[]" placeholder="e.g., Apartment A1" required />
+          </label>
+          <label>
+            Unit Type *
             <select name="unit_type[]" required>
               <option value="" disabled selected>Select Type</option>
               <option value="Apartment">Full Apartment</option>
               <option value="Room">Single Room</option>
               <option value="Studio">Studio Suite</option>
             </select>
-          </div>
-          <div class="form-group-row">
-            <input type="number" name="unit_beds[]" placeholder="Beds" min="0" value="0"/>
-            <input type="number" name="unit_baths[]" placeholder="Baths" min="0" value="0"/>
-          </div>
-        
+          </label>
+        </div>
       `;
       unitsContainer.appendChild(unitCard);
       unitCard
@@ -101,41 +128,73 @@ export async function handleFormSteps() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Fallback static strings map to missing layout components cleanly
-    const propertyPayload = {
-      title: document.getElementById("title")?.value || "Managed Asset Listing",
-      property_type:
-        document.getElementById("property_type")?.value || "Apartment",
-      status: document.getElementById("status")?.value || "available",
-      list_price:
-        parseFloat(document.getElementById("list_price")?.value) || 0.0,
-      currency: "NGN",
-      period: document.getElementById("period")?.value || "rent",
-      rent_expiry_date:
-        document.getElementById("rent_expiry_date")?.value || null,
-      owner_name:
-        document.getElementById("owner_name")?.value || "Unknown Client",
-      description: document.getElementById("description")?.value || "",
-      address: document.getElementById("address").value.trim(),
-      city: document.getElementById("city")?.value || "Lagos",
-      state: document.getElementById("state")?.value || "Lagos",
-      country: "Nigeria",
+    const parseNum = (id) => {
+      const val = document.getElementById(id)?.value;
+      return val && val.trim() !== "" ? parseFloat(val) : null;
+    };
+    const parseIntNum = (id) => {
+      const val = document.getElementById(id)?.value;
+      return val && val.trim() !== "" ? parseInt(val, 10) : null;
+    };
 
-      // Serialize nested sub-units into your fallback JSONB column layout
-      internal_units_json: Array.from(
-        unitsContainer.querySelectorAll(".unit-card"),
-      ).map((card) => ({
-        name: card.querySelector('input[name="unit_name[]"]').value.trim(),
-        type: card.querySelector('select[name="unit_type[]"]').value,
-      })),
+    const propertyPayload = {
+      // Step 1: Core Fields
+      title: document.getElementById("title").value.trim(),
+      owner_name: document.getElementById("owner_name").value.trim(),
+      description: document.getElementById("description").value.trim() || null,
+
+      // Step 2: Classifications
+      property_type: document.getElementById("property_type").value || null,
+      status: document.getElementById("status").value || null,
+      year_built: parseIntNum("year_built"),
+
+      // Step 3: Structural/Physical Attributes
+      bedrooms: parseIntNum("bedrooms"),
+      bathrooms: parseIntNum("bathrooms"),
+      total_rooms: parseIntNum("total_rooms"),
+      floor_space_sqm: parseNum("floor_space_sqm"),
+      lot_size_sqm: parseNum("lot_size_sqm"),
+      parking_spaces: parseIntNum("parking_spaces"),
+
+      // Step 5: Location Details
+      address: document.getElementById("address").value.trim(),
+      city: document.getElementById("city").value.trim(),
+      state: document.getElementById("state").value.trim(),
+      neighborhood:
+        document.getElementById("neighborhood").value.trim() || null,
+      postal_code: document.getElementById("postal_code").value.trim() || null,
+      country: "Nigeria",
+      latitude: parseNum("latitude"),
+      longitude: parseNum("longitude"),
+
+      // Step 6: Financial Columns
+      list_price:
+        parseFloat(document.getElementById("list_price").value) || 0.0,
+      period: document.getElementById("period").value || null,
+      rent_expiry_date:
+        document.getElementById("rent_expiry_date").value || null,
+      tax_annual: parseNum("tax_annual"),
+      association_fees_monthly: parseNum("association_fees_monthly"),
+      currency: "NGN",
+
+      // Step 4: Sub-unit Manifest Array
+      internal_units_json: unitsContainer
+        ? Array.from(unitsContainer.querySelectorAll(".unit-card")).map(
+            (card) => ({
+              name: card
+                .querySelector('input[name="unit_name[]"]')
+                .value.trim(),
+              type: card.querySelector('select[name="unit_type[]"]').value,
+            }),
+          )
+        : [],
     };
 
     try {
-      // Append runtime Auth identity meta allocations before sending down to SQL
       const {
         data: { user },
-      } = await supabase.auth.getUser(); // or import from supabase.js
-      if (!user) throw new Error("No active agent session detected.");
+      } = await supabase.auth.getUser();
+      if (!user) throw new Error("No active session tracked.");
 
       propertyPayload.agent_id = user.id;
       propertyPayload.organization_id =
@@ -144,8 +203,8 @@ export async function handleFormSteps() {
       await insertProperty(propertyPayload);
       window.location.href = "dashboard.html";
     } catch (err) {
-        console.error(err)
-      alert(`Submission failed: ${err.message}`);
+      console.error(err);
+      alert(`Publishing aborted: ${err.message}`);
     }
   });
 }

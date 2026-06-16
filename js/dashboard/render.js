@@ -1,9 +1,9 @@
-// js/dashboard/render.js
-
 /**
- * Updates top-level workspace KPI analytic card layouts
- * @param {Array} propertiesArray - Array of raw row metrics direct from Supabase
+ * Builds and injects real estate cards cleanly inside your layout grid target container
+ * @param {Array} propertiesArray - Collection array matching properties row schemas
+ * @param {Function} onDeleteClick - Action callback forwarding the unique instance target UUID
  */
+
 export function renderOverviewStats(propertiesArray) {
   const allPropertiesCount = document.getElementById("allPropertiesCount");
   const rentedPropertyCount = document.getElementById("rentedPropertyCount");
@@ -14,7 +14,6 @@ export function renderOverviewStats(propertiesArray) {
   if (!allPropertiesCount) return;
 
   const total = propertiesArray.length;
-  // Lowercase match matching our database status field transformations
   const rented = propertiesArray.filter(
     (p) => p.status?.toLowerCase() === "rented",
   ).length;
@@ -25,58 +24,74 @@ export function renderOverviewStats(propertiesArray) {
   availablePropertyCount.innerText = available;
 }
 
-/**
- * Builds and injects real estate cards cleanly inside your layout grid target container
- * @param {Array} propertiesArray - Collection array matching properties row schemas
- * @param {Function} onDeleteClick - Action callback forwarding the unique instance target UUID
- */
-export function renderPropertyCards(propertiesArray, onDeleteClick) {
+export async function renderPropertyCards(propertiesArray, onDeleteClick) {
   const detailsCard = document.getElementById("detailsCard");
   if (!detailsCard) return;
 
   if (propertiesArray.length === 0) {
-    detailsCard.innerHTML = `<p class="placeholderText">Nothing to show</p>`;
+    await createEmptyState({
+      container: detailsCard,
+      icon: "🏠",
+      title: "Nothing here yet",
+      description: "You have not added a property yet.",
+      actionText: "Add Property",
+      onAction: async () => {
+        await loadComponent(
+          "../components/modals/add-property.html",
+          "modalContainer",
+        );
+        await handleFormSteps();
+      },
+    });
     return;
   }
 
   detailsCard.innerHTML = "";
 
+  // FIXED: Create ONE single grid container OUTSIDE the loop
+  const twoColumnGrid = document.createElement("div");
+  twoColumnGrid.classList.add("two-column-grid");
+
   propertiesArray.forEach((property) => {
     const cardDiv = document.createElement("div");
+    cardDiv.classList.add("property-card");
 
-    // Match status text strings with your background class badges (.for-sale, .rented, .leased)
     let statusBadgeClass = "for-sale";
     if (property.status?.toLowerCase() === "rented")
       statusBadgeClass = "rented";
     if (property.status?.toLowerCase() === "leased")
       statusBadgeClass = "leased";
 
-    // Count items packed dynamically inside your internal JSONB column schema array
     const totalUnitsCount = Array.isArray(property.internal_units_json)
       ? property.internal_units_json.length
       : 0;
 
-    // Structure HTML strictly adhering to your semantic layout declarations
-    cardDiv.innerHTML = `
-            <h3>${property.owner_name || "Client Asset"}</h3>
-            <p><b>Title:</b> ${property.title || "Untitled Asset"}</p>
-            <p><b>Property Type:</b> ${property.property_type || "Unspecified"}</p>
-            <p>
-                <b>Property Status:</b> 
-                <span class="status-badge ${statusBadgeClass}">${property.status || "available"}</span>
-            </p>
-            <p>
-                <b>Managed Capacity:</b> 
-                <span class="unit-counter-badge">${totalUnitsCount} Units</span>
-            </p>
-            <p><b>Rent Valuation:</b> ₦${Number(property.list_price || 0).toLocaleString("en-NG", { minimumFractionDigits: 2 })}</p>
-            <div style="margin-top: 15px; display: flex; gap: 8px;">
-                <button type="button" class="action-view-btn view-btn" data-id="${property.id}">👀 View</button>
-                <button type="button" class="danger delete-btn" style="background: #ff4444; color: white;" data-id="${property.id}">🗑 Remove</button>
-            </div>
-        `;
+    const beds = property.bedrooms ?? 0;
+    const baths = property.bathrooms ?? 0;
+    const size = property.floor_space_sqm
+      ? `${property.floor_space_sqm} sqm`
+      : "N/A";
 
-    // Operational event link listeners
+    cardDiv.innerHTML = `
+      <h3>${property.owner_name || "Client Asset"}</h3>
+      <p><b>Title:</b> ${property.title || "Untitled Asset"}</p>
+      <p><b>Property Type:</b> ${property.property_type || "Unspecified"}</p>
+      <p>
+          <b>Property Status:</b> 
+          <span class="status-badge ${statusBadgeClass}">${property.status || "available"}</span>
+      </p>
+      <p><b>Specs:</b> 🛏️ ${beds} Beds | 🛁 ${baths} Baths | 📐 ${size}</p>
+      <p>
+          <b>Managed Capacity:</b> 
+          <span class="unit-counter-badge">${totalUnitsCount} Units</span>
+      </p>
+      <p><b>Rent Valuation:</b> ₦${Number(property.list_price || 0).toLocaleString("en-NG", { minimumFractionDigits: 2 })}</p>
+      <div style="margin-top: 15px; display: flex; gap: 8px;">
+          <button type="button" class="action-view-btn view-btn">👀 View</button>
+          <button type="button" class="danger delete-btn" style="background: #ff4444; color: white;">🗑 Remove</button>
+      </div>
+    `;
+
     cardDiv.querySelector(".view-btn").addEventListener("click", () => {
       localStorage.setItem("viewPropertyId", property.id);
       window.location.href = "property.html";
@@ -86,7 +101,10 @@ export function renderPropertyCards(propertiesArray, onDeleteClick) {
       onDeleteClick(property.id);
     });
 
-    // Use prepend so newly listed client assets appear instantly at the very top of the agent grid workspace
-    detailsCard.prepend(cardDiv);
+    // Append each individual card into the single parent grid container
+    twoColumnGrid.appendChild(cardDiv);
   });
+
+  // FIXED: Prepend the fully populated grid layout container into the main DOM target
+  detailsCard.prepend(twoColumnGrid);
 }
