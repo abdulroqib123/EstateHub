@@ -37,17 +37,6 @@
   font-weight: var(--font-bold);
 }
 
-/* Table Layout Badges */
-.status-badge {
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-.status-badge.for-sale { background: rgba(255, 174, 0, 0.15); color: #ffae00; }
-.status-badge.rented { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
-.status-badge.leased { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-
 .unit-counter-badge {
   display: inline-block;
   background: #222;
