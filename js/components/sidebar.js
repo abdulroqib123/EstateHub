@@ -15,8 +15,12 @@ function goToLink(selectElement) {
 
 // Link glows slightly when active
 const links = document.querySelectorAll(".anchor-nav-bar");
+const currentPath = window.location.pathname;
+
 links.forEach((link) => {
-  if (link.href === window.location.href) {
+  const linkPath = new URL(link.href).pathname;
+
+  if (currentPath === linkPath) {
     link.classList.add("active");
   }
 });
