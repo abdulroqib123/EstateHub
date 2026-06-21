@@ -1,5 +1,5 @@
 import { fetchOrgClients, removeClientFromDb } from "../data/clientsDb.js";
-import { handleClientSubmit } from "../create/add-client.js";
+import { handleOrgClientSubmit } from "../create/add-client.js";
 import { renderSectionHeader } from "../components/section-header.js";
 import { toastMsg } from "../components/toast.js";
 import { handleMemberInvite } from "../create/add-member.js";
@@ -194,7 +194,7 @@ export async function loadClients(userId, orgId) {
   if (addClientBtn) {
     addClientBtn.addEventListener("click", async () => {
       await loadComponent("../components/modals/create/add-client.html", "modalContainer");
-      await handleClientSubmit(userId, orgId, () => {
+      await handleOrgClientSubmit(userId, orgId, () => {
         loadClients(userId, orgId);
       });
     });

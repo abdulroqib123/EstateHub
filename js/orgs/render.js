@@ -12,7 +12,7 @@
       import { loadComponent, createEmptyState } from "https://scybud.github.io/scybud-ui/js/ui.js";
 import { handleOrgCreation } from "../create/create-org.js"; 
 import { handleMemberInvite } from "../create/add-member.js";
-import { handleClientSubmit } from "../create/add-client.js";
+import { handleOrgClientSubmit } from "../create/add-client.js";
 
 export async function renderOrgsCards(orgsArray, onDeleteClick) {
   const detailsCard = document.getElementById("detailsCard");
@@ -152,7 +152,7 @@ export async function renderClientsCards(clientsData, onDeleteCallback, loadClie
           "../components/modals/create/add-client.html",
           "modalContainer",
         );
-        await handleClientSubmit(userId, orgId, async () => {
+        await handleOrgClientSubmit(userId, orgId, async () => {
          await loadClients(userId, orgId);
         });
       },
@@ -170,7 +170,7 @@ export async function renderClientsCards(clientsData, onDeleteCallback, loadClie
 
     cardDiv.innerHTML = `
       <h3>${client.name || "Unknown Client"}</h3>
-      <p><b>Email:</b> ${client.email || "N/A"}</p>
+      <p><b>Email:</b> <a href="mailto:${client.email}">${client.email || "N/A"}</a></p>
       <p><b>Phone:</b> ${client.phone || "N/A"}</p>
       <div style="margin-top: 15px; display: flex; gap: 8px;">
           <button type="button" class="danger btn delete-btn" style="background: #ff4444; color: white;">🗑 Delete</button>
