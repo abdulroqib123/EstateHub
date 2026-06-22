@@ -22,7 +22,7 @@ export async function initOrgs() {
         // Reload dashboard rows locally down pipeline
         initOrgs();
       }
-    });
+    }, user.id);
   } catch (error) {
     console.error("Orgs error:", error.message);
   } 

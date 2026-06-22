@@ -28,6 +28,8 @@ export async function renderPropertyCards(propertiesArray, onDeleteClick, orgId)
   const detailsCard = document.getElementById("container");
   if (!detailsCard) return;
 
+      detailsCard.innerHTML = "";
+
   if (propertiesArray.length === 0) {
     detailsCard.innerHTML = "";
 
@@ -50,7 +52,6 @@ export async function renderPropertyCards(propertiesArray, onDeleteClick, orgId)
     return;
   }
 
-  detailsCard.innerHTML = "";
 
   // FIXED: Create ONE single grid container OUTSIDE the loop
   const twoColumnGrid = document.createElement("div");
@@ -109,6 +110,6 @@ export async function renderPropertyCards(propertiesArray, onDeleteClick, orgId)
     twoColumnGrid.appendChild(cardDiv);
   });
 
-  // FIXED: Prepend the fully populated grid layout container into the main DOM target
+  // Prepend the fully populated grid layout container into the main DOM target
   detailsCard.prepend(twoColumnGrid);
 }

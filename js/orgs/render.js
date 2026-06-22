@@ -14,7 +14,7 @@ import { handleOrgCreation } from "../create/create-org.js";
 import { handleMemberInvite } from "../create/add-member.js";
 import { handleOrgClientSubmit } from "../create/add-client.js";
 
-export async function renderOrgsCards(orgsArray, onDeleteClick) {
+export async function renderOrgsCards(orgsArray, onDeleteClick, userId) {
   const detailsCard = document.getElementById("detailsCard");
   if (!detailsCard) return;
 
@@ -60,12 +60,13 @@ export async function renderOrgsCards(orgsArray, onDeleteClick) {
   
   <div class="card-actions">
     <a href="org?org=${org.id}" class="btn action-view-btn view-btn">Open</a>
-    <button type="button" class="btn delete-btn">🗑 Delete</button>
+
+${org.owner_id === userId ? `<button type="button" class="btn delete-btn">🗑 Delete</button>` : ""}
   </div>
 `;
 
 
-    cardDiv.querySelector(".delete-btn").addEventListener("click", () => {
+    cardDiv.querySelector(".delete-btn")?.addEventListener("click", () => {
       onDeleteClick(org.id);
     });
 
@@ -109,7 +110,7 @@ export async function renderMembersCards(membersArray, onDeleteClick, userId, or
     cardDiv.classList.add("card");
 
     cardDiv.innerHTML = `
-      <h3>${mbr.agents.first_name + " " + mbr.agents.last_name || "Unknown member"}</h3>
+      <h3>${mbr.agent_id === userId ? "Me" : mbr.agents.first_name + " " + mbr.agents.last_name || "Unknown member"}</h3>
       <p>
           <b>Role:</b> 
           <span class="role-badge ${mbr.role}">${mbr.role}</span>
