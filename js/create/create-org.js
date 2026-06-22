@@ -31,7 +31,7 @@ role: "owner",
       await insertOrg(orgPayload);
       await insertOrgMember(orgMemberPayload);
       
-      window.location.href = "orgs.html";
+      window.location.href = "orgs";
     } catch (err) {
       console.error(err);
       toastMsg(`Publishing aborted: ${err.message}`, "error");

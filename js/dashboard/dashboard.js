@@ -10,7 +10,7 @@ export async function initDashboard(orgId) {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) {
-      window.location.href = "../auth/login.html";
+      window.location.href = "../auth/login";
       return;
     }
 

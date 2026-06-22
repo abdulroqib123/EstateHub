@@ -40,7 +40,7 @@ export async function renderPropertyCards(propertiesArray, onDeleteClick, orgId)
       actionText: "Add Property",
       onAction: async () => {
         await loadComponent(
-          "../components/modals/create/add-property.html",
+          "../components/modals/create/add-property",
           "modalContainer",
         );
         await handleFormSteps(orgId);
@@ -98,7 +98,7 @@ export async function renderPropertyCards(propertiesArray, onDeleteClick, orgId)
 
     cardDiv.querySelector(".view-btn").addEventListener("click", () => {
       localStorage.setItem("viewPropertyId", property.id);
-      window.location.href = "property.html";
+      window.location.href = "property";
     });
 
     cardDiv.querySelector(".delete-btn").addEventListener("click", () => {

@@ -23,7 +23,7 @@ export async function renderClientsCards(clientsData, onDeleteCallback, userId) 
       actionText: "Add Client",
       onAction: async () => {
         await loadComponent(
-          "../components/modals/create/add-client.html",
+          "../components/modals/create/add-client",
           "modalContainer",
         );
         await handlePersonalClientSubmit(userId, async () => {

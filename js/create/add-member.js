@@ -43,7 +43,22 @@ export async function handleMemberInvite(userId, orgId) {
 
       await insertOrgInvites(orgInvitePayload);
 
-      window.location.href = "orgs.html";
+      const baseUrl = window.location.origin; // Automatically uses localhost or app.loghue.com
+      const inviteUrl = `${baseUrl}/invite?token=${token}`;
+
+      
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    const { data } = await supabase.functions.invoke("send-org-invite", {
+      body: { email, inviteUrl },
+      headers: {
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+    });
+
+      toastMsg("Invite sent!", "success");
     } catch (err) {
       console.error(err);
       toastMsg(`Publishing aborted: ${err.message}`, "error");

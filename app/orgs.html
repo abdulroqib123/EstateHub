@@ -131,7 +131,7 @@ New org</button></div>
           addPropertyBtn.forEach((btn) => {
               btn.addEventListener("click", async () => {
                   await loadComponent(
-                      "../components/modals/create/create-org.html",
+                      "../components/modals/create/create-org",
                       "modalContainer"
                   );
                   await handleOrgCreation();

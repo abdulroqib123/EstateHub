@@ -6,9 +6,9 @@ const loadPageNavs = () => {
   if (!navBar) return;
 
   const anchors = [
-    { text: "Dashboard", href: "dashboard.html" },
-    { text: "Organisations", href: "orgs.html" },
-    { text: "Clients", href: "clients.html" },
+    { text: "Dashboard", href: "dashboard" },
+    { text: "Organisations", href: "orgs" },
+    { text: "Clients", href: "clients" },
   ];
 
   anchors.forEach((link) => {

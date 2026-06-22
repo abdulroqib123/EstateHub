@@ -201,7 +201,7 @@ export async function handleFormSteps() {
         user.user_metadata?.organization_id || null;
 
       await insertProperty(propertyPayload);
-      window.location.href = "dashboard.html";
+      window.location.href = "dashboard";
     } catch (err) {
       console.error(err);
       alert(`Publishing aborted: ${err.message}`);

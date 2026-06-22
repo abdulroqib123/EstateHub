@@ -281,7 +281,7 @@ export async function handleFormSteps(orgId) {
       propertyPayload.organization_id = orgId || null;
 
       await insertProperty(propertyPayload);
-      window.location.href = "dashboard.html";
+      window.location.href = "dashboard";
     } catch (err) {
       console.error(err);
       toastMsg(`Publishing aborted: ${err.message}`, "error");

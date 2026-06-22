@@ -27,7 +27,7 @@ export async function renderOrgsCards(orgsArray, onDeleteClick) {
       actionText: "Create org",
       onAction: async () => {
         await loadComponent(
-          "../components/modals/create/create-org.html",
+          "../components/modals/create/create-org",
           "modalContainer",
         );
         await handleOrgCreation();
@@ -59,7 +59,7 @@ export async function renderOrgsCards(orgsArray, onDeleteClick) {
   </p>
   
   <div class="card-actions">
-    <a href="org.html?org=${org.id}" class="btn action-view-btn view-btn">Open</a>
+    <a href="org?org=${org.id}" class="btn action-view-btn view-btn">Open</a>
     <button type="button" class="btn delete-btn">🗑 Delete</button>
   </div>
 `;
@@ -90,7 +90,7 @@ export async function renderMembersCards(membersArray, onDeleteClick, userId, or
       actionText: "Add member",
       onAction: async () => {
         await loadComponent(
-          "../components/modals/create/invite-member.html",
+          "../components/modals/create/invite-member",
           "modalContainer",
         );
         await handleMemberInvite(fetchOrgById, userId);
@@ -149,7 +149,7 @@ export async function renderClientsCards(clientsData, onDeleteCallback, loadClie
       actionText: "Add Client",
       onAction: async () => {
         await loadComponent(
-          "../components/modals/create/add-client.html",
+          "../components/modals/create/add-client",
           "modalContainer",
         );
         await handleOrgClientSubmit(userId, orgId, async () => {

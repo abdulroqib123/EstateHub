@@ -84,7 +84,7 @@ if (signupForm) {
           window.location.href = decodeURIComponent(redirectTo);
         } else {
           // Default behavior
-          window.location.href = "../app/dashboard.html";
+          window.location.href = "../app/dashboard";
         }
       }
     } finally {
