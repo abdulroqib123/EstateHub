@@ -114,12 +114,13 @@ export async function renderMembersCards(membersArray, onDeleteClick, userId, or
           <b>Role:</b> 
           <span class="role-badge ${mbr.role}">${mbr.role}</span>
       </p>
-      <div style="margin-top: 15px; display: flex; gap: 8px;">
-          <button type="button" class="danger btn delete-btn" style="background: #ff4444; color: white;">🗑 Remove</button>
+      <div class="card-actions">
+      ${mbr.role === "member" && mbr.agent_id !== userId ? `<button type="button" class="danger btn delete-btn" style="background: #ff4444; color: white;">🗑 Remove</button>` : ""
+      }
       </div>
     `;
 
-    cardDiv.querySelector(".delete-btn").addEventListener("click", () => {
+    cardDiv.querySelector(".delete-btn")?.addEventListener("click", () => {
       onDeleteClick(mbr.id);
     });
 
