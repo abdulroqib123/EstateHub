@@ -252,6 +252,46 @@ body {
   font-weight: 600;
 }
 
+.screenshots-section {
+  padding: 100px 0;
+}
+
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.screenshot-card {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  transition: transform .2s ease;
+}
+
+.screenshot-card:hover {
+  transform: translateY(-4px);
+}
+
+.screenshot-card img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+}
+
+.screenshot-card h3 {
+  padding: 20px 20px 10px;
+}
+
+.screenshot-card p {
+  padding: 0 20px 20px;
+  opacity: .8;
+  line-height: 1.6;
+}
+
 /* Simple Mockup Component Representing Dashboard Graphic */
 .mock-dashboard {
   background: #111827;
