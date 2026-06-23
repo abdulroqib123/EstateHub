@@ -3,7 +3,7 @@ import { loadComponent } from "https://scybud.github.io/scybud-ui/js/ui.js";
 export async function toastMsg(message, typeClass) {
   // Load modal only when needed
   await loadComponent(
-    "../../components/modals/toast",
+    "https://joinpropdek.vercel.app/components/modals/toast",
     "toast",
   );
 

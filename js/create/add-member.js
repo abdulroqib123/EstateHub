@@ -40,27 +40,28 @@ export async function handleMemberInvite(userId, orgId) {
     };
 
     try {
-
       await insertOrgInvites(orgInvitePayload);
 
       const baseUrl = window.location.origin; // Automatically uses localhost or app.loghue.com
       const inviteUrl = `${baseUrl}/join/index?token=${token}`;
 
-      
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    const { data } = await supabase.functions.invoke("send-org-invite", {
-      body: { email, inviteUrl },
-      headers: {
-        Authorization: `Bearer ${session?.access_token}`,
-      },
-    });
+      const { data } = await supabase.functions.invoke("send-org-invite", {
+        body: { email, inviteUrl },
+        headers: {
+          Authorization: `Bearer ${session?.access_token}`,
+        },
+      });
 
       toastMsg("Invite sent!", "success");
     } catch (err) {
-      console.error(err);
+      if (err.code === "23505") {
+        return toastMsg("User already a member or already invited", "error");
+      }
+
       toastMsg(`Publishing aborted: ${err.message}`, "error");
     }
   });
