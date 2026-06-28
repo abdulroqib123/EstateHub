@@ -67,7 +67,7 @@ async function sendPasswordResetNewPassword(password) {
   }
 
   alert("Password reset Complete!");
-  window.location.href = "https://app.loghue.com";
+  window.location.href = "https://joinpropdek.vercel.app";
   return true;
 }
 
