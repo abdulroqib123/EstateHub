@@ -2,7 +2,6 @@
 main {
   flex: 1;
   padding: 80px 20px 30px 20px;
-  margin-left: 280px;
   transition: margin 0.45s ease;  
   display: flex;
   flex-direction: column;
@@ -16,10 +15,6 @@ main h2 {
   font-weight: 600;
   margin-bottom: 25px;
   text-align: center;
-  background: linear-gradient(130deg, #ffae00, #fff700);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
 }
 
 /* Form Container */
