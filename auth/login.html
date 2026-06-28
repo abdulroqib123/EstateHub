@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | PropDek</title>
 
-      <!--SCYBUD UI-->
+    <!--SCYBUD UI-->
     <link
       rel="stylesheet"
       href="https://scybud.github.io/scybud-ui/css/variables.css"
@@ -18,25 +18,40 @@
       rel="stylesheet"
       href="https://scybud.github.io/scybud-ui/components/buttons/global-buttons.css"
     />
-<link rel="stylesheet" href="https://scybud.github.io/scybud-ui/css/animations.css">
+    <link
+      rel="stylesheet"
+      href="https://scybud.github.io/scybud-ui/css/animations.css"
+    />
 
     <!--APP CSS-->
-    <link rel="stylesheet" href="../css/components/toast.css">
+    <link rel="stylesheet" href="../css/components/toast.css" />
     <link rel="stylesheet" href="../css/auth.css" />
 
     <!--FAVICONS-->
-<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicons/favicon-16x16.png">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/favicons/favicon-16x16.png"
+    />
   </head>
-  
-  <body>
-    <div class="dot-container">
-    </div>
-    <main>
 
+  <body>
+    <div class="dot-container"></div>
+    <main>
       <div id="toast"></div>
-<!--
+      <!--
         <h1>Welcome to <span class="logo">Prop<span>Dek</span></span></h1>
         -->
 
@@ -58,12 +73,12 @@
           required
         />
         <button type="submit">Login</button>
-<p><a href="resetPassword">Forgot password?</a></p>
+        <p><a href="resetPassword">Forgot password?</a></p>
         <p>No account yet? <a id="signupLink" href="signup">Signup</a></p>
       </form>
     </main>
-    
-<script type="module" src="../js/auth/auth.js"></script>
-<script type="module" src="../js/auth/login.js"></script>
+
+    <script type="module" src="../js/auth/auth.js"></script>
+    <script type="module" src="../js/auth/login.js"></script>
   </body>
 </html>
